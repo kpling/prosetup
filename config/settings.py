@@ -2,7 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = os.getenv('SECRET_KEY', None)
+SECRET_KEY = 'stored in environment variable'
 
 DEBUG = os.getenv('DEBUG', False)
 
@@ -95,6 +95,7 @@ if os.getenv('ENVIRONMENT') == 'PRODUCTION':
 
     CORS_ORIGIN_ALLOW_ALL = True
     CSRF_COOKIE_SECURE = True
+    SECRET_KEY = os.getenv('SECRET_KEY', None)
     SECURE_HSTS_SECONDS = 60
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
