@@ -2,7 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = os.getenv('SECRET_KEY', None)
+SECRET_KEY = 'stored in environment variable'
 
 DEBUG = os.getenv('DEBUG', False)
 
@@ -15,6 +15,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'drf_yasg',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -90,11 +93,31 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+    'LOGIN_URL': '/admin/',
+    'LOGOUT_URL': '/admin/logout',
+    'DOC_EXPANSION': 'none',
+    'DEFAULT_MODEL_RENDERING': 'example',
+    'TAGS_SORTER': 'alpha',
+}
+
+REDOC_SETTINGS = {
+    'LAZY_RENDERING': False,
+    'SPEC_URL': '?format=openapi'
+
+}
+
 if os.getenv('ENVIRONMENT') == 'PRODUCTION':
     import django_heroku
 
     CORS_ORIGIN_ALLOW_ALL = True
     CSRF_COOKIE_SECURE = True
+    SECRET_KEY = os.getenv('SECRET_KEY', None)
     SECURE_HSTS_SECONDS = 60
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
