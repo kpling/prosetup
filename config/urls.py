@@ -4,7 +4,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-file = open(r'static/DESCRIPTION.md', 'r')
+file = open(r'static/description.md', 'r')
 description = file.read()
 file.close()
 
