@@ -93,6 +93,25 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+    'LOGIN_URL': '/admin/',
+    'LOGOUT_URL': '/admin/logout',
+    'DOC_EXPANSION': 'none',
+    'DEFAULT_MODEL_RENDERING': 'example',
+    'TAGS_SORTER': 'alpha',
+}
+
+REDOC_SETTINGS = {
+    'LAZY_RENDERING': False,
+    'SPEC_URL': '?format=openapi'
+
+}
+
 if os.getenv('ENVIRONMENT') == 'PRODUCTION':
     import django_heroku
 
